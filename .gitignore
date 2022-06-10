@@ -1,6 +1,7 @@
 fizzbuzz
 fizzbuzz.o
 perf.data
+perf.data.old
 read
 read.o
 write
