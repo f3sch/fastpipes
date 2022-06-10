@@ -15,3 +15,6 @@ Checkout the commit history to see the progress.
 
 ## Resources
 I followed this excellent [blog post](https://mazzo.li/posts/fast-pipes.html).
+
+## Disclaimer
+I put the fizzbuzz assembler file in this repo, but I do not claim ownership nor license it.

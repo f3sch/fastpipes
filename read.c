@@ -1,3 +1,8 @@
+/**
+ * @file read a stream
+ * @brief License-Identifier: MIT
+ */
+
 #include "common.h"
 
 static void handler(int sig) {

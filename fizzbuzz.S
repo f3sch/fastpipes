@@ -1,4 +1,5 @@
 // Taken from <https://codegolf.stackexchange.com/a/236630/108443>
+// NOT LICENSED UNDER THE REPOSITORY LICENSE!!!
 .intel_syntax prefix
 
 // Header files.
@@ -1363,4 +1364,3 @@ mov ARG3e, 141
 call write_stderr
 mov ARG1e, 73
 jmp exit
-
