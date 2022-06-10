@@ -5,7 +5,7 @@ OUT	= write read
 CC	 = gcc
 FLAGS	 = -c -Wall -O3
 LFLAGS	 = -O3
-# -g option enables debugging mode 
+# -g option enables debugging mode
 # -c flag generates object code for separate files
 
 
@@ -31,4 +31,4 @@ fizzbuzz: fizzbuzz.S
 
 # clean house
 clean:
-	rm -f $(OBJS) $(OUT) fizzbuzz.o fizzbuzz
+	rm -f $(OBJS) $(OUT) fizzbuzz.o fizzbuzz perf.data perf.data.old
