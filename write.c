@@ -20,14 +20,20 @@ int main(void) {
   size_t buf_size = BUFSIZE;
   buf = (char*)malloc(buf_size);
   memset((void*)buf, 'X', buf_size);
+  char* bufs[2] = {buf, buf + buf_size / 2};
+  int buf_ix = 0;
 
   // Loop
   while (true) {
-    size_t remaining = buf_size;
-    while (remaining > 0) {
-      size_t _written =
-          write(STDOUT_FILENO, &buf[buf_size - remaining], remaining);
-      remaining -= _written;
+    struct iovec bufvec = {
+        .iov_base = bufs[buf_ix],
+        .iov_len = buf_size / 2,
+    };
+    buf_ix = (buf_ix + 1) % 2;
+    while (bufvec.iov_len > 2) {
+      ssize_t ret = vmsplice(STDOUT_FILENO, &bufvec, 1, 0);
+      bufvec.iov_base = (void*)(((char*)bufvec.iov_base) + ret);
+      bufvec.iov_len -= ret;
     }
   }
 }

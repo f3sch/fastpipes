@@ -37,6 +37,8 @@ int main(void) {
 
   total = 0;
 
+  int devnull = open("/dev/null", O_WRONLY);
+
   // Take time now
   if (clock_gettime(CLOCK_MONOTONIC, &start) == -1) {
     fprintf(stderr, "Could not get start time!\n");
@@ -44,12 +46,14 @@ int main(void) {
 
   // Loop
   while (true) {
-    size_t remaining = buf_size;
-    while (remaining > 0) {
-      ssize_t _read = read(STDIN_FILENO, &buf[buf_size - remaining], remaining);
-      remaining -= _read;
+    ssize_t ret = splice(STDIN_FILENO, NULL, devnull, NULL, BUFSIZE, SPLICE_F_NONBLOCK|SPLICE_F_MORE);
+        if (ret < 0 && errno == EAGAIN) {
+      continue;
     }
-    total += buf_size;
+    if (ret < 0) {
+      fail("splice failed: %s", strerror(errno));
+    }
+    total += ret;
   }
 
 }
